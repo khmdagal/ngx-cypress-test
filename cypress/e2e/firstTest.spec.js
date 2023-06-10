@@ -36,4 +36,14 @@ describe("our firt suite", () => {
     //The most recommended way by Cypress - create your own locater
     cy.get("[data-cy='imputEmail1']");
   });
+
+  it("second test", () => {
+    cy.visit("/");
+    cy.contains("Forms").click();
+    cy.contains("Form Layouts").click();
+
+    cy.get('[data-cy="signInButton"]')
+
+    cy.contains('Sign in')
+  })
 });

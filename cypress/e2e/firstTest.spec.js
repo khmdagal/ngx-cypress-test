@@ -45,5 +45,20 @@ describe("our first suite", () => {
     cy.get('[data-cy="signInButton"]')
 
     cy.contains('Sign in')
+
+    cy.contains('[status="warning"]', 'Sign in')
+    
+    cy.get('#inputEmail3')
+      .parents('form')
+      .find('button')
+      .should('contain', 'Sign in')
+      .parents('form')
+      .find('nb-checkbox')
+      .click()
+    
+    
+      //explain: hey cypress find nb-card that contains text "Horizontal form" and within that card find an web element type equals "email"
+    // by using find command is used to find and element from parent element
+    cy.contains('nb-card', 'Horizontal form').find('[type="email"]')
   })
 });

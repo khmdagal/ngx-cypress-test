@@ -1,6 +1,6 @@
 /// <reference types="cypress"/>
 
-describe("our firt suite", () => {
+describe("our first suite", () => {
   it("first test", () => {
     cy.visit("/");
     cy.contains("Forms").click();
@@ -12,7 +12,7 @@ describe("our firt suite", () => {
     //find element by ID
     cy.get("#inputEmail");
 
-    //find element by classname
+    //find element by classnames
     cy.get(".input-full-width");
 
     //find element by attribute name
@@ -21,7 +21,7 @@ describe("our firt suite", () => {
     //find element by attribute name and value
     cy.get("[placeholder='Email']");
 
-    //find element by classvalue
+    //find element by class value
     cy.get("[class='input-full-width size-medium shape-rectangle']");
 
     //tag name and attribute value

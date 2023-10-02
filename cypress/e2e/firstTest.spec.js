@@ -47,7 +47,11 @@ describe("our first suite", () => {
     cy.contains("Sign in");
 
     cy.contains('[status="warning"]', "Sign in");
+    cy.contains("nb-card", "Horizontal form").find("button");
+    cy.contains("nb-card", "Horizontal form").contains("Sign in");
+    cy.contains("nb-card", "Horizontal form").get("button");
 
+    // cypress chains and DOM
     cy.get("#inputEmail3")
       .parents("form")
       .find("button")
@@ -59,5 +63,24 @@ describe("our first suite", () => {
     //explain: hey cypress find nb-card that contains text "Horizontal form" and within that card find an web element type equals "email"
     // by using find command is used to find and element from parent element
     cy.contains("nb-card", "Horizontal form").find('[type="email"]');
+  });
+
+  // we run this test to check in the using grid card
+  // that we have to input boxes which are labeled Email and Password
+  // first we go to the parent element cy.contains("nb-card", "Using the Grid")
+  // and then we chained child element after the parent element .find('[for="inputEmail1"]')
+  // and then we did the assertion by doing :- .should("contain", "Email");
+  // like this :- cy.contains("nb-card", "Using the Grid").find('[for="inputEmail1"]').should("contain", "Email");
+  it.only("save subject of command", () => {
+    cy.visit("/");
+    cy.contains("Forms").click();
+    cy.contains("Form Layouts").click();
+
+    cy.contains("nb-card", "Using the Grid")
+      .find('[for="inputEmail1"]')
+      .should("contain", "Email");
+    cy.contains("nb-card", "Using the Grid")
+      .find('[for="inputPassword2"]')
+      .should("contain", "Password");
   });
 });

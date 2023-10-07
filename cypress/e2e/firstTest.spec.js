@@ -1,5 +1,8 @@
 /// <reference types="cypress"/>
 
+// -----------------------   FROM VIDEO 1 TO VIDEO 24 ---------------------------------------------------
+
+
 describe("our first suite", () => {
   it("first test", () => {
     cy.visit("/");
@@ -71,7 +74,7 @@ describe("our first suite", () => {
   // and then we chained child element after the parent element .find('[for="inputEmail1"]')
   // and then we did the assertion by doing :- .should("contain", "Email");
   // like this :- cy.contains("nb-card", "Using the Grid").find('[for="inputEmail1"]').should("contain", "Email");
-  it.only("save subject of command", () => {
+  it("save subject of command", () => {
     cy.visit("/");
     cy.contains("Forms").click();
     cy.contains("Form Layouts").click();
@@ -82,5 +85,64 @@ describe("our first suite", () => {
     cy.contains("nb-card", "Using the Grid")
       .find('[for="inputPassword2"]')
       .should("contain", "Password");
+  });
+
+  // How to extract text values from web
+  it.only("extract text values from web", () => {
+    cy.visit("/");
+    cy.contains("Forms").click();
+    cy.contains("Form Layouts").click();
+
+    // 1
+    cy.get('[for="exampleInputEmail1"]').should("contain", "Email address");
+
+    // 2 this is jquary syntax and it is short way to do it
+    cy.get('[for="exampleInputEmail1"]').then((label) => {
+      const labelText = label.text();
+      expect(labelText).to.equal("Email address");
+      // you can use also cy.wrap method
+      cy.wrap(labelText).should("contain", "Email address");
+    });
+
+    // cypress syntax
+    cy.get('[for="exampleInputEmail1"]')
+      .invoke("text")
+      .then((text) => {
+        expect(text).to.equal("Email address");
+      });
+
+    // you can combine invoke() method and normal should() assertion
+    cy.get('[for="exampleInputEmail1"]')
+      .invoke("text")
+      .should("contain", "Email address");
+
+    //3
+    // you can use alias as() method to save the email address text so you can use it
+    // any where else, like a variable. In the coming example 'labelText' has a value of "Email address"
+
+    cy.get('[for="exampleInputEmail1"]')
+      .invoke("text")
+      .as("labelText")
+      .should("contain", "Email address");
+
+    //4 invoke command can do also
+    // invoke command can help you to validate the state of your application.
+    // for example if a checkbox has certain attribute when is checked and has another one when not checked.
+
+    cy.get('[for="exampleInputEmail1"]')
+      .invoke("attr", "class")
+      .then((classValue) => {
+        expect(classValue).to.equal("label");
+      });
+
+    //5 invoke property
+
+    cy.get("#exampleInputEmail1").type("test@test.com");
+    cy.get("#exampleInputEmail1")
+      .invoke("prop", "value")
+      .should("contain", "test@test.com")
+      .then((property) => {
+        expect(property).to.equal("test@test.com");
+      });
   });
 });

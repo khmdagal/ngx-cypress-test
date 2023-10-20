@@ -1,7 +1,7 @@
 /// <reference types="cypress"/>
 
 import { onNavigationPage } from "../support/page_objects/navigationPage";
-import { onFormLayoutsPage } from "./formLayoutsPage";
+import { onFormLayoutsPage } from "../support/page_objects/formLayoutsPage";
 
 describe("Page Object Design Pattern -- Testing page objects", () => {
   beforeEach("Open application", () => {
